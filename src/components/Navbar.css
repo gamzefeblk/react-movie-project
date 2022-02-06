@@ -1,0 +1,14 @@
+.buttons{
+    display:flex;
+    flex-direction: row;
+    height: 50px;
+  }
+  
+  .navbar{
+    background-color: #0d47a1 !important;
+    padding: 1rem 3rem;
+  }
+  .navbar-brand{
+    color: white !important;
+  }
+ 
