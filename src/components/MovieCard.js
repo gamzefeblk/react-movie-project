@@ -18,7 +18,7 @@ const setVoteClass = (vote) => {
       <img src={IMG_API+poster_path}/>
       <div className='movie-info'>
          <h3>{title}</h3>
-         <span className={`tag ${setVoteClass({vote_average})}`
+         <span className={`tag ${setVoteClass(vote_average)}`
          }>{vote_average}</span>
       </div>
       <div className='movie-over'>
