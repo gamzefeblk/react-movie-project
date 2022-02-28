@@ -2,7 +2,7 @@
     width:100%;
     display: flex;
     justify-content: center;
-    background-color:#bdbdbd ;
+    background-color:#e2dfdf ;
     padding: 1rem;
 
   }
@@ -13,6 +13,7 @@
     border-radius: 5px;
     outline: none;
     border: none;
+    
   }
 
 .movie-container{
@@ -28,7 +29,7 @@
   }
   
   .movie{
-    background-color: #3F51B5;
+    background-color: #4fa7c2;
     border-radius: 3px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;

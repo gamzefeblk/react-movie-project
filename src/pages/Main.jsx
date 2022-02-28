@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import MovieCard from "../components/MovieCard";
 import "./Pages.css"
 import Loading from "./Loading";
 import NotFound from "./NotFound";
+import AuthContex from "../context/AuthContext";
 
 // const UNFILTERED = 'https://api.themoviedb.org/3/discover/movie?api_key='
 const UNFILTERED = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`
@@ -18,6 +19,8 @@ const Main = () => {
     const [loading,setLoading]=useState(false)
     const [notFound,setNotFound]=useState(false)
     let content;
+    const {currentUser} = useContext(AuthContex)
+
 
     const getMovies = (API) => {
         setNotFound(false)
@@ -25,10 +28,10 @@ const Main = () => {
         axios.get(API)
              .then((res)=>{
                  setMovies(res.data.results)
-                 setTimeout(()=>{
-                    setLoading(false)
-                 },1000)
-                
+                //  setTimeout(()=>{
+                //     setLoading(false)
+                //  },1000)
+                setLoading(false)
                  if(res.data.results.length==0){
                     setNotFound(true)
                 }
@@ -41,8 +44,13 @@ const Main = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        getMovies(FILTERED+searchTerm)
+        if(currentUser){
+            getMovies(FILTERED+searchTerm)
         setSearchTerm("")
+        }else{
+            alert("Please log in to make a search")
+        }
+        
     }
 
     useEffect(() => {
@@ -84,7 +92,8 @@ const Main = () => {
              onChange={(e)=> setSearchTerm(e.target.value) } />
              <input type="submit"
                     value="Search"
-                    className="btn btn-primary"/>
+                    className="btn btn-primary"
+                    style={{backgroundColor:"#4fa7c2"}}/>
          </form>
          {content}
          

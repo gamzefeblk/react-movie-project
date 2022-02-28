@@ -2,8 +2,6 @@ import React, { useState,useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import "./Pages.css"
 import AuthContex from "../context/AuthContext";
-import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
-import { auth } from "../auth/firebase-config";
 
 
 const Register = () => {
@@ -15,17 +13,17 @@ const Register = () => {
     const [registerClass,setRegisterClass]=useState("login-form")
     const navigate=useNavigate();
 
-    const handleSubmit = async (e) => {
+    const {credentials,handleCredentials} = useContext(AuthContex)
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try{
-            let user= await createUserWithEmailAndPassword(auth,email,password)
-            let displayName=firstName+' '+lastName
-            await updateProfile(auth.currentUser,{displayName:displayName})
-            navigate("/react-movie-project")
-        }
-        catch(err){
-            alert(err);
-        }
+        handleCredentials(firstName,lastName,email,password)
+        setFirstName("")
+        setLastName("")
+        setEmail("")
+        setPassword("")
+        setRegisterClass("d-none")
+        setAlertClass("alert m-auto display-4")
     }
 
  return(
